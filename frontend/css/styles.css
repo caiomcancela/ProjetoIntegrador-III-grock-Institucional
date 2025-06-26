@@ -1,0 +1,406 @@
+:root {
+    /* Mapeia sua paleta para as variáveis internas do Bootstrap */
+    --bs-primary: #047857;
+    --bs-primary-rgb: 4,120,87;
+    --bs-secondary: #CBD5E1;
+    --bs-secondary-rgb: 203,213,225;
+    --bs-body-bg: var(--background-color);
+    --bs-body-color: var(--text-color);
+  }
+
+:root {
+    --background-color: #121212;
+    --text-color: #FFFFFF;
+    --hover-color: #036745;
+    --card-background: #1a1a1a;
+    --input-background: #2a2a2a;
+    --text-secondary: #CBD5E1;
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Reset e Estilos Globais */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Navegação */
+
+#navLogin {
+    margin-bottom: -35px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--text-color);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: var(--hover-color);
+}
+
+/* Botões */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+    transform: translateY(-2px);
+}
+.btn-primary:active {
+    /* estado ativo (clicado) */
+    --bs-btn-active-color:       #ffffff;
+    --bs-btn-active-bg:          #047857;
+    --bs-btn-active-border-color:#047857;
+  }
+  .btn-primary:disabled {
+    /* estado desabilitado */
+    --bs-btn-disabled-color:     #047857;
+    --bs-btn-disabled-border-color:#047857;
+  }
+
+
+
+
+.btn-outline-primary {
+    /* cor do texto e da borda em estado normal */
+    --bs-btn-color:              #ffffff;
+    --bs-btn-border-color:       #ffffff;
+  }
+  .btn-outline-primary:hover,
+  .btn-outline-primary:focus {
+    /* ao passar o mouse ou receber foco */
+    --bs-btn-hover-color:        #ffffff;
+    --bs-btn-hover-bg:           #047857;
+    --bs-btn-hover-border-color: #047857;
+  }
+  .btn-outline-primary:active {
+    /* estado ativo (clicado) */
+    --bs-btn-active-color:       #ffffff;
+    --bs-btn-active-bg:          #047857;
+    --bs-btn-active-border-color:#047857;
+  }
+  .btn-outline-primary:disabled {
+    /* estado desabilitado */
+    --bs-btn-disabled-color:     #047857;
+    --bs-btn-disabled-border-color:#047857;
+  }
+  /* —————————————————————————————— */
+  
+  .card small.text-muted {
+    color: var(--text-color) !important;
+}
+
+/* Cards */
+.card {
+    background-color: var(--card-background);
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    color: var(--text-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.card-text {
+    color: var(--secondary-color);
+}
+
+/* Formulários */
+.form-control {
+    background-color: var(--input-background);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.75rem 1rem;
+}
+
+.form-control:focus {
+    background-color: var(--input-background);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    box-shadow: 0 0 0 0.2rem rgba(4, 120, 87, 0.25);
+}
+
+#publicarForm input[type="file"].form-control {
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.4rem 0.75rem; /* reduz ligeiramente o padding para alinhamento */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* 1.1) Hover e foco no input file */
+  #publicarForm input[type="file"].form-control:hover,
+  #publicarForm input[type="file"].form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.15);
+  }
+  
+  /* 2) Personalização do botão “Escolher arquivo” (WebKit) */
+  #publicarForm input[type="file"].form-control::-webkit-file-upload-button {
+    background-color: var(--hover-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #publicarForm input[type="file"].form-control::-webkit-file-upload-button:hover {
+    background-color: var(--primary-color);
+  }
+  
+  /* 3) Para navegadores Firefox (botão nativo) */
+  #publicarForm input[type="file"].form-control::-moz-file-upload-button {
+    background-color: var(--hover-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #publicarForm input[type="file"].form-control::-moz-file-upload-button:hover {
+    background-color: var(--primary-color);
+  }
+  
+  /* 4) Placeholder de file input (quando suportado) */
+  #publicarForm input[type="file"].form-control::placeholder {
+    color: var(--text-secondary);
+  }
+  
+  /* 5) Espaçamento extra caso necessário */
+  #publicarForm .mb-3 {
+    margin-bottom: 1rem;
+  }
+
+#formAtualizarPerfil .form-label {
+    color: var(--text-color);
+    font-weight: 500;
+  }
+
+  #formAtualizarPerfil .form-control {
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #formAtualizarPerfil .form-control::placeholder {
+    color: var(--text-secondary);
+  }
+  
+
+  #formAtualizarPerfil .form-control:focus {
+    background-color: var(--input-background);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+  }
+
+  #formAtualizarPerfil input[type="file"].form-control {
+    background-color: var(--input-background);
+    color: var(--text-color);
+    padding: 0.4rem 0.75rem; /* reduz um pouco o padding padrão */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+  }
+
+  #formAtualizarPerfil input[type="file"].form-control:hover,
+  #formAtualizarPerfil input[type="file"].form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.15);
+  }
+
+  #formAtualizarPerfil .mb-3 {
+    margin-bottom: 1rem;
+  }
+  
+  /* 5) Ajuste específico para alinhar bem o texto dentro do file input */
+  #formAtualizarPerfil input[type="file"].form-control::-webkit-file-upload-button {
+    background-color: var(--hover-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #formAtualizarPerfil input[type="file"].form-control::-webkit-file-upload-button:hover {
+    background-color: var(--primary-color);
+  }
+  
+
+.input-group-text {
+    background-color: transparent;
+    border: none;
+    color: var(--secondary-color);
+}
+
+.input-group .form-control,
+.input-group .input-group-text {
+    border-radius: 0;
+}
+
+.form-label {
+    color: var(--text-color);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Badges */
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.badge.bg-primary {
+    background-color: var(--primary-color);
+}
+
+
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+#texto {
+    color: var(--hover-color);
+    margin-top: 0;
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    padding: 6rem 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+#segundo {
+    margin-top: 6.3rem;
+}
+
+/* Checkbox personalizado */
+.form-check-input:checked + .form-check-label {
+    color: var(--hover-color);
+    font-weight: 500;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .hero {
+        padding: 4rem 0;
+    }
+}
+
+/* Garante borda branca em volta do avatar no navbar */
+.navbar .dropdown img.rounded-circle {
+    border: 2px solid #ffffff;
+    object-fit: cover;
+  }
+  
+  /* Ajuste de hover para dropdown do perfil */
+  .dropdown:hover .dropdown-toggle img {
+    filter: brightness(0.9);
+  }
+  
+  /* Estilização opcional do card de atualização de perfil */
+  #formAtualizarPerfil {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+  #formAtualizarPerfil .form-control,
+  #formAtualizarPerfil .form-select {
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+  }
+
+  .table {
+    color: var(--text-color);
+    background-color: var(--card-background);
+    border-color: var(--border-color);
+}
+
+.table thead th {
+    color: var(--text-color);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.table tbody td {
+    color: var(--text-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.table > :not(caption) > * > * {
+    background-color: transparent; /* remove fundo branco do Bootstrap */
+}
+  

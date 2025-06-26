@@ -1,0 +1,67 @@
+// Este é o seu arquivo de schema do Prisma.
+// Saiba mais sobre ele na documentação: https://pris.ly/d/prisma-schema
+
+// Define o gerador de cliente, que cria o Prisma Client para você usar no código.
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Configura a fonte de dados, apontando para o seu banco de dados PostgreSQL no Render.
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modelo para os Usuários do sistema.
+model User {
+  id        String    @id @default(uuid())
+  nome      String
+  email     String    @unique
+  senha     String    // A senha será armazenada criptografada
+  curso     String?   // O '?' indica que este campo é opcional
+  avatarUrl String?   // URL da imagem do avatar, também opcional
+  role      String    @default("USER") // Para diferenciar Admin de User no futuro
+
+  // Relações: Um usuário pode escrever vários artigos e fazer vários comentários.
+  articles  Article[]
+  comments  Comment[]
+}
+
+// Modelo para os Artigos do blog.
+model Article {
+  id             String    @id @default(uuid())
+  titulo         String
+  conteudo       String    @db.Text // Usamos @db.Text para textos longos
+  imageUrl       String?
+  tempoLeitura   Int?      // Tempo de leitura em minutos, opcional
+  dataPublicacao DateTime  @default(now())
+
+  // Relação: Cada artigo pertence a um único autor (User).
+  autor     User     @relation(fields: [autorId], references: [id])
+  autorId   String
+
+  // Relações: Um artigo pode ter vários comentários e várias tags.
+  comments  Comment[]
+  tags      Tag[]     @relation("ArticleTags")
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  conteudo  String
+  data      DateTime @default(now())
+
+  autor     User     @relation(fields: [autorId], references: [id])
+  autorId   String
+
+  // A alteração foi feita na linha abaixo
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId String
+}
+// Modelo para as Tags (categorias dos artigos).
+model Tag {
+  id       String    @id @default(uuid())
+  nome     String    @unique // O nome da tag deve ser único (ex: "UNIFAGOC", "Eventos")
+
+  // Relação: Uma tag pode estar em vários artigos.
+  articles Article[] @relation("ArticleTags")
+}

@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    /* Strict Type-Checking Options */
+    "strict": true,
+
+    /* Modules */
+    "module": "commonjs",
+    "baseUrl": "./",
+    "target": "esNext",
+
+    /* Emit */
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "incremental": true,
+
+    /* Interop Constraints */
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    /* Decorators */
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    /* Completeness */
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true
+  }
+}

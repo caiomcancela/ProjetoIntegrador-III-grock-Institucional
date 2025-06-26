@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Perfil – GROCK</title>
+  <!-- 1) Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- 2) Bootstrap Icons (se necessário) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 3) Seu CSS customizado -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navbar (mesma estrutura de recomendados/pesquisa, mas aqui opcionalmente sem o “Publicar”) -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand">
+            <img src="assets/images/grock-logo.png" alt="GROCK" height="60">
+        </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="recomendados.html">Recomendados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pesquisa.html">Pesquisa</a>
+          </li>
+        </ul>
+        <!-- Reutilize o dropdown de perfil aqui para “Sair” -->
+        <div class="dropdown">
+          <a href="#" id="perfilDropdownHeader" data-bs-toggle="dropdown" aria-expanded="false" class="d-inline-block text-decoration-none">
+            <img src="assets/images/avatar-padrao.png" alt="Avatar Usuário" class="rounded-circle" width="40" height="40">
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="perfilDropdownHeader">
+            <li><a class="dropdown-item" href="editarPerfil.html">Atualizar Perfil</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" id="btnLogoutHeader" href="#">Sair</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <h2 class="text-primary mb-4">Atualizar Meu Perfil</h2>
+        <form id="formAtualizarPerfil" class="card p-4">
+
+          <!-- 1) Foto de Perfil -->
+          <div class="mb-3 text-center">
+            <img id="avatarPreview" src="assets/images/avatar-padrao.png" alt="Avatar Usuário" class="rounded-circle mb-2" width="100" height="100">
+            <div>
+              <label for="avatarUpload" class="form-label">Alterar Foto de Perfil</label>
+              <input class="form-control" type="file" id="avatarUpload" accept="image/*">
+            </div>
+          </div>
+
+          <!-- 2) Nome de Usuário -->
+          <div class="mb-3">
+            <label for="nomeUsuario" class="form-label">Nome de Usuário</label>
+            <input type="text" class="form-control" id="nomeUsuario" placeholder="Digite seu nome" required>
+          </div>
+
+          <!-- 3) Senha -->
+          <div class="mb-3">
+            <label for="senhaUsuario" class="form-label">Nova Senha</label>
+            <input type="password" class="form-control" id="senhaUsuario" placeholder="********" required>
+          </div>
+
+          <!-- 4) Seleção de Curso -->
+          <div class="mb-3">
+            <label for="cursoUsuario" class="form-label">Selecione seu Curso</label>
+            <select class="form-select" id="cursoUsuario" required>
+              <option value="" disabled selected>Escolha um curso</option>
+              <option value="ADM">Administração</option>
+              <option value="BIO">Biomedicina</option>
+              <option value="COMP">Ciência da Computação</option>
+              <option value="CONT">Ciências Contábeis</option>
+              <option value="DIR">Direito</option>
+              <option value="EFI-b">Educação Física (Bacharelado)</option>
+              <option value="EFI-l">Educação Física (Licenciatura)</option>
+              <option value="ENF">Enfermagem</option>
+              <option value="EST/COS">Estética e Cosmética</option>
+              <option value="FARM">Farmácia</option>
+              <option value="FISIO">Fisioterapia</option>
+              <option value="MED">Medicina</option>
+              <option value="NUT">Nutrição</option>
+              <option value="ODONTO">Odontologia</option>
+              <option value="PED">Pedagogia</option>
+              <option value="PSI">Psicologia</option>
+            </select>
+          </div>
+
+          <!-- 5) Botão de Salvar -->
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- JavaScript do Bootstrap + Axios (ou Fetch) para chamadas de API -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+
+    /*
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const resp = await fetch('/api/usuario/dados', { credentials: 'include' });
+    if (!resp.ok) throw new Error('Não autenticado');
+    const user = await resp.json();
+    avatarPreview.src = user.avatarUrl || 'assets/images/avatar-padrao.png';
+    document.getElementById('nomeUsuario').value = user.nome;
+    document.getElementById('cursoUsuario').value = user.curso;
+  } catch (err) {
+    window.location.href = 'login.html';
+  }
+});
+*/
+    // 1) Previsuazlização do avatar antes do upload
+    const avatarUpload = document.getElementById('avatarUpload');
+    const avatarPreview = document.getElementById('avatarPreview');
+    avatarUpload.addEventListener('change', () => {
+      const file = avatarUpload.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => avatarPreview.src = reader.result;
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // 2) Submissão do formulário de atualização
+    document.getElementById('formAtualizarPerfil').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Coleta dados
+      const formData = new FormData();
+      const avatarFile = avatarUpload.files[0];
+      if (avatarFile) formData.append('avatar', avatarFile);
+      formData.append('nome', document.getElementById('nomeUsuario').value);
+      formData.append('senha', document.getElementById('senhaUsuario').value);
+      formData.append('curso', document.getElementById('cursoUsuario').value);
+
+      try {
+        // Chama API de atualização de perfil (ajuste a URL conforme back-end)
+        const response = await fetch('/api/usuario/atualizar', {
+          method: 'POST',
+          body: formData,
+          credentials: 'include' // para cookies de sessão, se usado
+        });
+        if (!response.ok) throw new Error('Falha ao atualizar perfil');
+
+        // Sucesso: redirecionar para página desejada (ex.: “recomendados.html”)
+        window.location.href = 'recomendados.html';
+      } catch (err) {
+        alert('Erro ao atualizar perfil: ' + err.message);
+      }
+    });
+
+    // 3) Lógica de logout
+    document.getElementById('btnLogoutHeader').addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        await fetch('/api/usuario/logout', { method: 'POST', credentials: 'include' });
+      } catch (_) { /* Ignorar erro de rede */ }
+      window.location.href = 'index.html';
+    });
+  </script>
+  <script src="js/config.js"></script>
+</body>
+</html>
